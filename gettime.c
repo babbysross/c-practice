@@ -1,3 +1,5 @@
+// A simple, real-time clock in the terminal.
+
 #include <stdio.h>
 #include <time.h>
 #include <unistd.h>
