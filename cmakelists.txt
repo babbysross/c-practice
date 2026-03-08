@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 3.28.0)
+
+project(myprogram LANGUAGES C)
+
+# Create executable `myprogram` from the source file `main.c`.
+# Multiple source files can be listed, separated by spaces.
+add_executable(
+    myprogram
+    main.c
+)
+
+# Use the C23 standard.
+set_property(TARGET myprogram PROPERTY C_STANDARD 23)
+set_property(TARGET myprogram PROPERTY C_STANDARD_REQUIRED ON)
+set_property(TARGET myprogram PROPERTY C_EXTENSIONS OFF)
