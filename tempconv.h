@@ -1,17 +1,21 @@
+#ifndef TEMPCONV_H
+#define TEMPCONV_H
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <errno.h> 
+#include <errno.h>
 #include <limits.h>
 
-float c2f(int celsius) {
-    return ((celsius * 1.8) + 32);
+static inline float c2f(int celsius) {
+    return ((celsius * 1.8f) + 32.0f);
 }
 
-float f2c(int fahrenheit) {
-    return ((fahrenheit - 32) * 1.8);
+static inline float f2c(int fahr) {
+    /* Fahrenheit to Celsius: (F - 32) * 5/9 */
+    return ((fahr - 32) * (5.0f / 9.0f));
 }
 
-int parsetemp( const char* input, int* temp) {
+static inline int parsetemp(const char* input, int* temp) {
     char* endptr;
     long value;
     errno = 0;
@@ -27,3 +31,5 @@ int parsetemp( const char* input, int* temp) {
     *temp = (int)value;
     return 1;
 }
+
+#endif // TEMPCONV_H

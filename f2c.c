@@ -2,34 +2,14 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <limits.h>
-
-float f2c(int fahr) {
-    return ((fahr - 32) * 5 / 9);
-}
-
-int parsetemp( const char* input, int* temp) {
-    char* endptr;
-    long value;
-    errno = 0;
-    value = strtol(input, &endptr, 10);
-
-    if (errno != 0 || *endptr != '\0') {
-        return 0;
-    }
-    if (value < INT_MIN || value > INT_MAX) {
-        return 0;
-    }
-
-    *temp = (int)value;
-    return 1;
-}
+#include "tempconv.h"
 
 int main(int argc, char **argv) {
-    int fahr;                                   //Declare year variable
+    int fahr;                                   //Declare temperature variable
     char input[50];
 
     if (argc > 2) {                             //Input validation, max 1 argument
-        printf("Usage: %s <degrees (C)>\n", argv[0]);
+        printf("Usage: %s <degrees (F)>\n", argv[0]);
         return 1;
     }
 
@@ -39,7 +19,7 @@ int main(int argc, char **argv) {
             return 1;
         }
     } else {
-            printf("Enter a temperature in Celsius: ");
+            printf("Enter a temperature in Fahrenheit: ");
 
             if (scanf("%49s", input) != 1) {
                 printf("\nInput error.\n");
