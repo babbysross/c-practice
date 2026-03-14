@@ -4,24 +4,18 @@
 #include <string.h>
 #include <unistd.h>
 
-char caesarc(char c, int shift) {
+// Function to apply caesar cipher shift to a character.
+// mode: 1 for encrypt, 2 for decrypt
+
+char caesar(char c, int shift, int mode) {
+    if (mode == 2) {
+        shift = -shift;
+    }
     if (c >= 'a' && c <= 'z') {
         return (c - 'a' + shift) % 26 + 'a';
     }
     else if (c >= 'A' && c <= 'Z') {
         return (c - 'A' + shift) % 26 + 'A';
-    }
-    else {
-        return c;
-    }
-}
-
-char caesard(char c, int shift) {
-    if (c >= 'a' && c <= 'z') {
-        return (c - 'a' - shift + 26) % 26 + 'a';
-    }
-    else if (c >= 'A' && c <= 'Z') {
-        return (c - 'A' - shift + 26) % 26 + 'A';
     }
     else {
         return c;
@@ -38,8 +32,8 @@ int main(int argc, char** argv) {
     int shift_set = 0;
     int mode = 0; // 0 for none, 1 for encrypt, 2 for decrypt
     const char* infile_path = "message.txt";
-    const char* outfile_path = "cipher.txt";
 
+    // Handle command arguments
     while ((opt = getopt(argc, argv, "s:ed")) != -1) {
         switch (opt) {
         case 's':
@@ -58,46 +52,52 @@ int main(int argc, char** argv) {
         }
     }
 
+    // Validate shift & mode are set
     if (!shift_set || mode == 0) {
         fprintf(stderr, "Usage: %s [-s shift] [-e|d (encrypt|decrypt)] [input-file]\n", argv[0]);
         return 1;
     }
 
+    // Take input file from command line if provided, otherwise use default
     if (optind < argc) {
         infile_path = argv[optind];
     }
 
-    // open files and store in infile/outfile pointers
+    // open input file and store in infile pointer
     infile = fopen(infile_path, "r");
     if (!infile) {
+        perror("fopen");
+        return 1;
+    }
+
+    // Determine output file name based on mode
+    const char* outfile_path = (mode == 1) ? "cipher.txt" : "decipher.txt";
+
+    // open output file and store in outfile pointer
+    outfile = fopen(outfile_path, "w");
+    if (!outfile) {
         perror("fopen");
         fclose(infile);
         return 1;
     }
-    outfile = fopen(outfile_path, "w");
-    if (!outfile) {
-        perror("fopen");
-        fclose(outfile);
-        return 1;
-    } 
 
     // read each line from infile, apply caesar cipher, and write to outfile
-
     while (fgets(input, sizeof(input), infile)) {
         size_t len = strlen(input);
         for (size_t i = 0; i < len; i++) {
             if (input[i] == '\n') {
-                output[i] = '\n';
-            } else if (mode == 1) {
-                output[i] = caesarc(input[i], shift);
-            } else {
-                output[i] = caesard(input[i], shift);
+                output[i] = '\n';   // Prevent breaking newlines
+            }
+            else {
+                output[i] = caesar(input[i], shift, mode);
             }
         }
-        output[len] = '\0';
-        fputs(output, outfile);
+        
+        output[len] = '\0';         // Null-terminate output 
+        fputs(output, outfile);     // Write shifted line to file
     }
 
+    // Tidy up
     fclose(infile);
     fclose(outfile);
     return 0;
