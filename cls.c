@@ -1,8 +1,9 @@
 #include <stdio.h>
 
-void cls(void) 
+void cls(void)
 {
     printf("\e[2J\e[H");
+    fflush(stdout);
 }
 
 int main()

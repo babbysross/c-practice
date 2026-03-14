@@ -2,7 +2,7 @@
 
 int main() {
     // Declare variables
-    FILE *infile;
+    FILE* infile;
     // Start nlines at 1 to account for no \n on last line
     int nlines = 1;
     char c;
@@ -17,7 +17,7 @@ int main() {
     }
 
     // count \n characters, results in number of lines - 1 (no \n on last line)
-    for (c=getc(infile); c != EOF; c=getc(infile)) {
+    for (c = getc(infile); c != EOF; c = getc(infile)) {
         if (c == '\n') {
             nlines++;
         }
@@ -28,12 +28,15 @@ int main() {
     float belarray[nlines], usarray[nlines];
 
     // fgets reads the header line and sets the infile pointer to line 2
-    fgets(header, 50, infile); 
+    if (fgets(header, 50, infile) == NULL) {
+        perror("fgets");
+        return 1;
+    }
 
     // iterate from second line to final line, store values in arrays 
     //and calculate sums for each country
     for (int i = 0; i < (nlines - 1); i++) {
-        if(fscanf(infile, "%f %f%*[^\n]\n", &belarray[i], &usarray[i]) != 2) {
+        if (fscanf(infile, "%f %f%*[^\n]\n", &belarray[i], &usarray[i]) != 2) {
             perror("fscanf");
             return 1;
         }
