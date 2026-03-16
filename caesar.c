@@ -23,14 +23,9 @@ char caesar(char c, int shift, int mode) {
 }
 
 int main(int argc, char** argv) {
-    FILE* infile;
-    FILE* outfile;
-    char input[256];
-    char output[256];
-    int opt;
-    int shift = 0;
-    int shift_set = 0;
-    int mode = 0; // 0 for none, 1 for encrypt, 2 for decrypt
+    FILE *infile, *outfile;
+    char input[256], output[256];
+    int opt, shift = 0, shift_set = 0, mode = 0;
     const char* infile_path = "message.txt";
 
     // Handle command arguments
@@ -96,7 +91,7 @@ int main(int argc, char** argv) {
         output[len] = '\0';         // Null-terminate output 
         fputs(output, outfile);     // Write shifted line to file
     }
-
+    fputs("\n", outfile); // Add newline to end of outfile
     // Tidy up
     fclose(infile);
     fclose(outfile);
