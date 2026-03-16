@@ -54,9 +54,7 @@ int main(int argc, char** argv) {
     }
 
     // Take input file from command line if provided, otherwise use default
-    if (optind < argc) {
-        infile_path = argv[optind];
-    }
+    if (optind < argc) infile_path = argv[optind];
 
     // open input file and store in infile pointer
     infile = fopen(infile_path, "r");
