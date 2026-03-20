@@ -1,6 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <errno.h>
 #include <limits.h>
 #include "tempconv.h"
 
@@ -33,6 +31,6 @@ int main(int argc, char **argv) {
         }
 
         printf("%d°C is equal to %5.1f°F\n", celsius, c2f(celsius));
-    
+
     return 0;
 }
