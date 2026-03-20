@@ -1,0 +1,26 @@
+# Chapter 1
+
+- [ ] Exercise 1-1:   
+- [ ] Exercise 1-2:   
+- [ ] Exercise 1-3:   
+- [ ] Exercise 1-4:   
+- [ ] Exercise 1-5:   
+- [x] Exercise 1-6:   Verify that the expression getchar () != EOF is 0 or 1.
+- [x] Exercise 1-7:   Write a program to print the value of EOF.
+- [x] Exercise 1-8:   Write a program to count blanks, tabs, and newlines
+- [x] Exercise 1-9:   Write a program to copy its input to its output, replacing each string of one or more blanks by a single blank
+- [x] Exercise 1-10:  Write a program to copy its input to its output, replacing each tab by \t, each backspace by \b, and each backslash by \\. 
+- [ ] Exercise 1-11:  How would you test the word count program? What kinds of input are most likely to uncover bugs if there are any?
+- [x] Exercise 1-12:  Write a program that prints its input one word per line.
+- [ ] Exercise 1-13:  
+- [ ] Exercise 1-14:  
+- [ ] Exercise 1-15:  
+- [ ] Exercise 1-16:  
+- [ ] Exercise 1-17:  
+- [ ] Exercise 1-18:  
+- [ ] Exercise 1-19:  
+- [ ] Exercise 1-20:  
+- [ ] Exercise 1-21:  
+- [ ] Exercise 1-22:  
+- [ ] Exercise 1-23:  
+- [ ] Exercise 1-24:  
