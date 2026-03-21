@@ -1,4 +1,4 @@
-// K&R Exercise 1-8
+// K&R Exercise 1-13
 
 #include <stdio.h>
 
@@ -10,7 +10,7 @@ int main(void) {
     int c, state, len;
     int length_freq[MAXLEN];
 
-    for (int i = 0; i <= MAXLEN; ++i)
+    for (int i = 0; i < MAXLEN; ++i)
         length_freq[i] = 0;    
 
     state = OUT;
@@ -19,7 +19,7 @@ int main(void) {
         if (c == ' ' || c == '\n' || c == '\t') {
             if (state == IN) {
                 if (len > MAXLEN)
-                    ++length_freq[MAXLEN]; //overflow handling
+                    ++length_freq[MAXLEN-1]; //overflow handling
                 else
                     ++length_freq[len];
                 len = 0; //reset length for next word

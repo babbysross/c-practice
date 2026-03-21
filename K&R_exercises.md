@@ -13,7 +13,7 @@
 - [x] Exercise 1-11:  How would you test the word count program? What kinds of input are most likely to uncover bugs if there are any?
 - [x] Exercise 1-12:  Write a program that prints its input one word per line.
 - [x] Exercise 1-13:  Write a program to print a histogram of the lengths of words in its input.
-- [ ] Exercise 1-14:  Write a program to print a histogram of the frequencies of different characters in its input.
+- [x] Exercise 1-14:  Write a program to print a histogram of the frequencies of different characters in its input.
 - [ ] Exercise 1-15:  
 - [ ] Exercise 1-16:  
 - [ ] Exercise 1-17:  
