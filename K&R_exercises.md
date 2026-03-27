@@ -17,7 +17,7 @@
 - [ ] Exercise 1-15:  Rewrite the temperature conversion program from Section 1.2 to use a function for conversion.
 - [ ] Exercise 1-16:  Revise the main routine of the longest-line program so it will correctly print the length of arbitrarily long input lines, and as much as possible of the text.
 - [ ] Exercise 1-17:  Write a program to print all input lines that are longer than 80 characters.
-- [ ] Exercise 1-18:  Write a program to remove trailing blanks and tabs from each line of input, and to delete entirely blank lines.
+- [x] Exercise 1-18:  Write a program to remove trailing blanks and tabs from each line of input, and to delete entirely blank lines.
 - [ ] Exercise 1-19:  Write a function 'reverse(s)' that reverses the character string 's'. Use it to write a program that reverses its input a line at a time
 - [ ] Exercise 1-20:  
 - [ ] Exercise 1-21:  
