@@ -84,8 +84,13 @@ void printgrid(char* grid) {
         for (int x = 0; x < wid; x++) {
             printf("%c", getcell(grid, x, y));
         }
-        printf("\n");
+        //printf("\n");
     }
+}
+
+void refresh(char* grid) {
+    printf("\e[2J\e[H\n");
+    printgrid(grid);
 }
 
 // for given x,y position, return alive neighbours
@@ -111,14 +116,17 @@ void setgrid(char* grid, char state) {
     }
 }
 
+// game of life logic, for loop resetting each time condition met?
 void gameoflife(char* grid, int x, int y) {
     int n = getneighbours(grid, x, y);
     if (getcell(grid, x, y) == ALIVE) {
         if (n < 2 || n >3) {
             setcell(grid, x, y, DEAD);
+            refresh(grid);
         } 
     } else if (getcell(grid, x, y) == DEAD) {
-        if (n > 3) setcell(grid, x, y, ALIVE);
+        if (n == 3) setcell(grid, x, y, ALIVE);
+        refresh(grid);
     }
     return;
 }
@@ -128,22 +136,52 @@ int main(void) {
     grid_t* lim;
     getWinSize();
     char grid[wid * hig];
+
+    printf("\e[?25l");
     printf("\e[2J\e[H\n");
     setgrid(grid, DEAD);
-    grid[246] = ALIVE;
-    grid[celloffset(19,19)] = ALIVE;
-    grid[celloffset(19,20)] = ALIVE;
-    grid[celloffset(19,21)] = ALIVE;
-    grid[celloffset(20,20)] = ALIVE;
-    grid[celloffset(20,21)] = ALIVE;
-    grid[celloffset(21,19)] = ALIVE;
-    grid[celloffset(21,20)] = ALIVE;
-    grid[celloffset(21,21)] = ALIVE;
+    
+    grid[celloffset(29,0)] = ALIVE;
+    grid[celloffset(27,1)] = ALIVE;
+    grid[celloffset(29,1)] = ALIVE;
+    grid[celloffset(17,2)] = ALIVE;
+    grid[celloffset(18,2)] = ALIVE;
+    grid[celloffset(25,2)] = ALIVE;
+    grid[celloffset(26,2)] = ALIVE;
+    grid[celloffset(39,2)] = ALIVE;
+    grid[celloffset(40,2)] = ALIVE;
+    grid[celloffset(16,3)] = ALIVE;
+    grid[celloffset(20,3)] = ALIVE;
+    grid[celloffset(25,3)] = ALIVE;
+    grid[celloffset(26,3)] = ALIVE;
+    grid[celloffset(39,3)] = ALIVE;
+    grid[celloffset(40,3)] = ALIVE;
+    grid[celloffset(5,4)] = ALIVE;
+    grid[celloffset(6,4)] = ALIVE;
+    grid[celloffset(15,4)] = ALIVE;
+    grid[celloffset(21,4)] = ALIVE;
+    grid[celloffset(25,4)] = ALIVE;
+    grid[celloffset(26,4)] = ALIVE;
+    grid[celloffset(5,5)] = ALIVE;
+    grid[celloffset(6,5)] = ALIVE;
+    grid[celloffset(15,5)] = ALIVE;
+    grid[celloffset(19,5)] = ALIVE;
+    grid[celloffset(21,5)] = ALIVE;
+    grid[celloffset(22,5)] = ALIVE;
+    grid[celloffset(27,5)] = ALIVE;   
+    grid[celloffset(29,5)] = ALIVE;  
+    grid[celloffset(15,6)] = ALIVE;  
+    grid[celloffset(21,6)] = ALIVE;  
+    grid[celloffset(29,6)] = ALIVE;  
+    grid[celloffset(16,7)] = ALIVE;  
+    grid[celloffset(20,7)] = ALIVE;  
+    grid[celloffset(17,8)] = ALIVE;  
+    grid[celloffset(18,8)] = ALIVE; 
     printgrid(grid);
+    usleep(1000000 * RATE_S);
     while (1) {
         for (int i = 0; i < sizeof(grid); i++) {
             pos_t pos = cellpos(grid, i);
-            printf("%d %d %d\n", pos.xpos, pos.ypos, wid);
             gameoflife(grid, pos.xpos, pos.ypos);
         } 
         printf("\e[2J\e[H\n");
